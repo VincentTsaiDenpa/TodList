@@ -1,0 +1,21 @@
+<div *ngIf="todoItems.length>0">
+    <ul *ngFor="let item of todoItems" class="list-group col-md-4">
+        <li  class="list-group-item list-group-item-action">
+            <div class="row">
+                <div class="col-md-8">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="item.complete">&nbsp;
+                    <span class="list-group-item-heading" [ngClass]="item.complete?'todo-check':''">{{item.name}}</span>
+                    <span *ngIf="item.description.length>0" class="list-group-item-text"
+                        [ngClass]="item.complete?'todo-check':''">:{{item.description}}</span>
+                </div>
+                <div class="col-md-4">
+                    <span class="btn btn-secondary" (click)="editItem(item)">Edit</span>&nbsp;
+                    <span class="btn btn-secondary" (click)="removeItem(item)">X</span>
+                </div>
+            </div>
+            <div *ngIf="item.editMode">
+                <app-todo-item-edit [todoItem]="item"></app-todo-item-edit>
+            </div>
+        </li>
+    </ul>
+</div>
